@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#07070b" />
+  <meta name="description" content="Cápsula do Tempo — Terceirão 2026. Uma obra de arte digital interativa sobre memórias, passagem do tempo e futuro." />
+  <title>Cápsula do Tempo — Terceirão 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <div class="experience-progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <button class="sound-toggle" id="soundToggle" type="button" aria-label="Ativar música ambiente" title="Música ambiente">
+    <i data-lucide="volume-x"></i>
+    <span>som</span>
+  </button>
+  <audio id="ambientAudio" loop preload="none">
+    <source src="assets/ambient.mp3" type="audio/mpeg" />
+  </audio>
+
+  <main>
+    <section class="hero section" id="inicio" data-section="01">
+      <div class="hero-orbit orbit-a"></div>
+      <div class="hero-orbit orbit-b"></div>
+      <div class="hero-content reveal-sequence">
+        <p class="eyebrow">CÁPSULA DO TEMPO · ARTE DIGITAL</p>
+        <h1><span>TERCEIRÃO</span><strong>2026</strong></h1>
+        <p class="hero-copy">Durante anos, contamos os dias para chegar até aqui.<br>Agora, queremos guardar alguns deles para sempre.</p>
+        <button class="primary-btn" id="startExperience" type="button">
+          <span>INICIAR EXPERIÊNCIA</span>
+          <i data-lucide="arrow-down-right"></i>
+        </button>
+      </div>
+      <div class="scroll-whisper">role para atravessar o tempo</div>
+    </section>
+
+    <section class="time-section section" id="tempo" data-section="02">
+      <div class="section-shell time-shell">
+        <div class="section-kicker">02 · O TEMPO</div>
+        <div class="time-stage" id="timeStage">
+          <div class="year-rail" aria-label="Linha do tempo 2024 a 2026">
+            <button class="year active" data-year="2024" type="button">2024</button>
+            <span class="year-line"></span>
+            <button class="year" data-year="2025" type="button">2025</button>
+            <span class="year-line"></span>
+            <button class="year" data-year="2026" type="button">2026</button>
+          </div>
+          <div class="time-copy" aria-live="polite">
+            <p class="time-number" id="timeNumber">2024</p>
+            <h2 id="timeTitle">Tudo ainda parecia distante.</h2>
+            <p id="timeText">A gente mudou sem perceber. Entre novas rotinas, primeiras escolhas e amizades que começaram a ocupar um lugar enorme.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="what-remains section" id="fica" data-section="03">
+      <div class="section-shell remains-shell">
+        <div class="section-kicker">03 · O QUE FICA?</div>
+        <h2>Quando tudo isso acabar,<br><em>o que realmente fica?</em></h2>
+        <div class="word-field" id="wordField" aria-label="Palavras que representam memórias do terceirão"></div>
+        <p class="hint">toque ou aproxime o cursor</p>
+      </div>
+    </section>
+
+    <section class="capsules section" id="capsulas" data-section="04">
+      <div class="section-shell">
+        <div class="section-kicker">04 · CÁPSULAS DA TURMA</div>
+        <div class="section-heading split-heading">
+          <h2>Pequenas mensagens.<br><em>Um tempo inteiro dentro delas.</em></h2>
+          <p>Abra uma cápsula para descobrir o que a turma quis guardar. As respostas podem ser substituídas pelas mensagens reais dos alunos.</p>
+        </div>
+        <div class="capsule-list" id="capsuleList"></div>
+      </div>
+    </section>
+
+    <section class="film section" id="obra" data-section="05">
+      <div class="section-shell film-shell">
+        <div class="section-kicker">05 · NOSSA OBRA</div>
+        <div class="film-intro">
+          <h2>Memórias, vivências<br><em>que guardaremos para sempre.</em></h2>
+          <p>Transformamos momentos que pareciam comuns em uma memória que agora podemos revisitar.</p>
+        </div>
+        <div class="cinema-frame" id="cinemaFrame">
+          <div class="cinema-glow"></div>
+          <video id="memoryVideo" controls preload="metadata" playsinline poster="assets/video-poster.jpg">
+            <source src="assets/memorias.mp4" type="video/mp4" />
+          </video>
+          <button class="cinema-placeholder" id="playMemories" type="button" aria-label="Assistir às nossas memórias">
+            <span class="play-ring"><i data-lucide="play"></i></span>
+            <strong>ASSISTIR ÀS NOSSAS MEMÓRIAS</strong>
+            <small>vídeo da turma · até 4 minutos</small>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="future section" id="futuro" data-section="06">
+      <div class="section-shell future-shell">
+        <div class="section-kicker">06 · MENSAGEM PARA O FUTURO</div>
+        <div class="future-card">
+          <div class="lock-visual" aria-hidden="true">
+            <div class="lock-ring"></div>
+            <i data-lucide="lock-keyhole"></i>
+          </div>
+          <p class="future-label">CÁPSULA TEMPORAL BLOQUEADA</p>
+          <h2>PARA ABRIR<br>EM <span>2036</span></h2>
+          <p class="future-line">Esta parte da nossa história ainda não aconteceu.</p>
+          <p>Daqui a dez anos, talvez nossas vidas estejam completamente diferentes. Mas, em algum momento, todos nós estivemos aqui.</p>
+          <div class="decade-path" aria-label="2026 até 2036">
+            <span>2026</span>
+            <div><b></b></div>
+            <span>2036</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="art-tech section" id="arte-tecnologia" data-section="07">
+      <div class="section-shell art-tech-shell">
+        <div class="section-kicker">07 · ARTE + TECNOLOGIA</div>
+        <p class="art-statement">Esta experiência<br><em>também é uma obra.</em></p>
+        <p class="art-explainer">Programação, tipografia, movimento, audiovisual, música e interação se encontram para transformar nossas experiências em uma produção digital.</p>
+        <div class="disciplines" aria-label="Elementos desta obra de arte digital">
+          <span>Programação</span><i></i><span>Audiovisual</span><i></i><span>Fotografia</span><i></i><span>Tipografia</span><i></i><span>Animação</span><i></i><span>Interatividade</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="ending section" id="fim" data-section="08">
+      <div class="ending-content">
+        <p class="end-line line-one">O Ensino Médio termina.</p>
+        <p class="end-line line-two">As memórias não.</p>
+        <h2>Terceirão <span>2026</span></h2>
+        <div class="group-members" id="groupMembers"></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="capsule-dialog" id="capsuleDialog">
+    <button class="dialog-close" id="dialogClose" type="button" aria-label="Fechar cápsula"><i data-lucide="x"></i></button>
+    <div class="dialog-meta"><span id="dialogIndex"></span> · CÁPSULA ABERTA</div>
+    <h3 id="dialogTitle"></h3>
+    <div class="messages" id="dialogMessages"></div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
